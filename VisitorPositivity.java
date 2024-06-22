@@ -17,6 +17,6 @@ import java.util.List;
  *                     or processed by the visitor.
  */
 
-public interface VisitorMessage {
+public interface VisitorPositivity {
   public void visit(List < Double > positive);
 }

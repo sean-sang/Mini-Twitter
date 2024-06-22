@@ -6,7 +6,7 @@
  */
 import java.util.*;
 
-public class Message implements VisitorMessage {
+public class Message implements VisitorPositivity {
 
   // Composite Pattern: List of all users and a map of user IDs to user objects
   public static List < String > messages = new ArrayList < > ();
@@ -63,12 +63,12 @@ public class Message implements VisitorMessage {
    * and sets the `positivePercentage` based off those count of those values.
    */
   public void calculatePositivity() {
-    String[] parts = text.toLowerCase().split("\\s+");
+    String[] parts = text.replaceAll("[^a-zA-Z\\s]", "").toLowerCase().split("\\s+");  
     int positive = 0;
-    for (String i: parts) {
-      if (Arrays.stream(Utils.positiveWords).anyMatch(i::equalsIgnoreCase)) {
-        positive++;
-      }
+    for (String i : parts) {
+        if (Arrays.stream(Utils.positiveWords).anyMatch(i::equalsIgnoreCase)) {
+            positive++;
+        }
     }
     setPositivePercentage((positive * 100.0) / (parts.length * 1.0));
   }

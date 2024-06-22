@@ -169,11 +169,14 @@
  
      // Calculate and display average message positivity
      List < Double > messagePositivity = new ArrayList < > ();
-     for (String i: Message.messages)
-       Message.messageMap.get(i).visit(messagePositivity);
+     messagePositivity.clear();  // Clear the list before each calculation
+     for (String i : Message.messages) {
+         Message.messageMap.get(i).visit(messagePositivity);
+     }
  
      OptionalDouble optionalDouble = messagePositivity.stream().mapToDouble(a -> a).average();
-     JButton positiveButton = new JButton("<html><center>Positive<br>" + (optionalDouble.isPresent() ? optionalDouble.getAsDouble() : "0") + "%</html>");
+     JButton positiveButton = new JButton("<html><center>Positive<br>" +
+                                         (optionalDouble.isPresent() ? optionalDouble.getAsDouble() : "0") + "%</html>");
  
      JButton lastUpdatedUserButton = new JButton("<html><center>Last Updated User</html>");
  
